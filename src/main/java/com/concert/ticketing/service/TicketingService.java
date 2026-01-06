@@ -51,24 +51,26 @@ public class TicketingService {
     }
 
     /**
-     * 좌석 예약(기존 로직 + 캐시 무효화 추가)
+     * 일반 메서드로 변경(더 이상 여기에서 락 걸지 않음)
      */
     @Transactional
     public Long reserveSeat(Long userId, Long seatId) {
         // 1. 유저 조회
         User user = userRepository.findById(userId).orElseThrow(()-> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
-        /**
-         * 낙관적 락 사용 시
         // 2. 좌석 조회
         Seat seat = seatRepository.findById(seatId).orElseThrow(()-> new IllegalArgumentException("좌석을 찾을 수 없습니다."));
-         */
+
+        // 이미 예약된 좌석인지 더블체크
+        if (seat.getStatus() != Seat.SeatStatus.AVAILABLE) {
+            throw new IllegalStateException("이미 예약된 좌석입니다.");
+        }
 
         // 비관적 락 조회
         // 2. 좌석 조회
-        Seat seat = seatRepository.findByIdWithLock(seatId).orElseThrow(()-> new IllegalArgumentException("좌석을 찾을 수 없습니다."));
+        // Seat seat = seatRepository.findByIdWithLock(seatId).orElseThrow(()-> new IllegalArgumentException("좌석을 찾을 수 없습니다."));
 
-        //3. 좌석 예약 -> 이미 예약된 경우 예외 발생
+        //3. 좌석 예약
         seat.reserve();
 
         // 4. 예약 생성 및 저장

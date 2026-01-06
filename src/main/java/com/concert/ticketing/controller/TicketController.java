@@ -1,7 +1,9 @@
 package com.concert.ticketing.controller;
 
+import com.concert.ticketing.service.TicketingFacade;
 import com.concert.ticketing.service.TicketingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class TicketController {
 
     private final TicketingService ticketingService;
+    private final TicketingFacade ticketingFacade;
 
+    /**
     // 예약 요청 API
     // POST http://localhost:8080/booking
     @PostMapping("/booking")
@@ -21,6 +25,13 @@ public class TicketController {
             // 실패
             return "예약 실패 : " + e.getMessage();
         }
+    }
+    */
+
+    @PostMapping("/reserve")
+    public ResponseEntity<String> reserve(@RequestBody ReservationRequest request) {
+        ticketingFacade.reserve(request.userId(), request.seatId());
+        return ResponseEntity.ok("예약 성공!");
     }
 
     // 요청 데이터 받을 DTO
