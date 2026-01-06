@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
 
     // 이미 예약된 좌석입니다.
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<Map<String, String>> handleIllegalStateException(IllegalArgumentException e) {
+    public ResponseEntity<Map<String, String>> handleIllegalStateException(IllegalStateException e) {
         Map<String, String> response = new HashMap<>();
         response.put("code", "CONFLICT");
         response.put("message", e.getMessage());
