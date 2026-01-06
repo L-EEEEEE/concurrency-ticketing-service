@@ -1,0 +1,8 @@
+### 좌석 예약 요청
+POST http://152.67.219.50:8080/booking
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "seatId": 1
+}
