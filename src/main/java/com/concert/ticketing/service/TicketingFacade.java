@@ -26,7 +26,7 @@ public class TicketingFacade {
 
             if(!available) {
                 System.out.println("락 획득 실패 (다른 사람이 예약 중)");
-                throw  new RuntimeException("접속량이 많아 실패했습니다. 다시 시도해주세요.");
+                throw  new IllegalStateException("현재 접속자가 많습니다. 다시 시도해주세요.");
             }
 
             // 3. 락을 얻은 사람만 예약 수행
