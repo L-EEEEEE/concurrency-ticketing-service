@@ -6,6 +6,7 @@ spring:
     password: ${DB_PASSWORD:root}
 
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: update
     properties:
