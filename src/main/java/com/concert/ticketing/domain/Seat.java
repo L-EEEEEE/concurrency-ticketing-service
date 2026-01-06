@@ -21,8 +21,8 @@ public class Seat {
     @Enumerated(EnumType.STRING)
     private SeatStatus status;  // AVAILABLE, RESERVED, SOLD_OUT
 
-    @Version
-    private Long version;
+//    @Version    // 낙관적 락
+//    private Long version;
 
     public Seat(Long concertId, int seatNo) {
         this.concertId = concertId;
