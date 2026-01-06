@@ -2,9 +2,7 @@ package com.concert.ticketing.controller;
 
 import com.concert.ticketing.service.TicketingService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,4 +26,9 @@ public class TicketController {
     // 요청 데이터 받을 DTO
     public record ReservationRequest(Long userId, Long seatId) {}
 
+    // 좌석 상태 조회 API
+    @GetMapping("/seats/{seatId}/status")
+    public String getSeatStatus(@PathVariable Long seatId) {
+        return ticketingService.getSeatStatus(seatId);
+    }
 }
