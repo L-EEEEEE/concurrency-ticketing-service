@@ -26,7 +26,7 @@ public class TicketController {
         ticketingFacade.reserve(request.userId(), request.seatId());
         messagingTemplate.convertAndSend("/topic/seats", request.seatId());
 
-        return ResponseEntity.ok("예약 성공!");
+        return ResponseEntity.ok("예약 성공");
     }
 
     // 요청 데이터 받을 DTO
