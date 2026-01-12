@@ -10,7 +10,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 @RestController
 @RequestMapping("/reserve")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class TicketController {
 
     private final TicketingService ticketingService;
