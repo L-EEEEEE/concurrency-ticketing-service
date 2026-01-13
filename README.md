@@ -2,8 +2,6 @@
 Spring Boot와 React를 활용한 대규모 좌석 실시간 예약 및 상태 관리 시스템 > 사용자의 예약 현황을 WebSocket을 통해 실시간으로 브로드캐스팅하며, 데이터 정합성을 보장합니다.
 
 # 🚀 Key Features (주요 기능)
-대규모 좌석 렌더링: Konva.js(Canvas API)를 활용하여 2,500개의 좌석을 끊김 없이 렌더링하고 줌/드래그 최적화.
-
 실시간 상태 동기화: WebSocket(STOMP) 및 SockJS를 기반으로 좌석 예약 상태를 모든 접속자에게 0.1초 내외로 실시간 전파.
 
 데이터 정합성 보장: 초기 로딩 시 **REST API(Snapshot)**로 상태를 동기화하고, 이후 변화는 **WebSocket(Delta)**으로 수신하는 하이브리드 방식 채택.
