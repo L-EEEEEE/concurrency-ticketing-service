@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/reserve")
 @RequiredArgsConstructor
@@ -27,6 +29,12 @@ public class TicketController {
         messagingTemplate.convertAndSend("/topic/seats", request.seatId());
 
         return ResponseEntity.ok("예약 성공");
+    }
+
+    @GetMapping("/seats")
+    public ResponseEntity<List<Long>> getReservedSeats() {
+        List<Long> reservedIds = ticketingService.getInitialReservedSeats();
+        return ResponseEntity.ok(reservedIds);
     }
 
     // 요청 데이터 받을 DTO

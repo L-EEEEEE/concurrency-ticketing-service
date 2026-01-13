@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -82,5 +83,9 @@ public class TicketingService {
         redisTemplate.delete(cacheKey);
 
         return booking.getId();
+    }
+
+    public List<Long> getInitialReservedSeats() {
+        return bookingRepository.findAllReservedSeatsIds();
     }
 }
